@@ -88,8 +88,18 @@ export const Hero = ({ onScrollToWork, onScrollToContact }: HeroProps) => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-text-secondary text-base md:text-lg max-w-xl font-light leading-relaxed mt-6 mx-auto lg:mx-0"
           >
-            Software Developer & AI Engineer building scalable web applications, AI-powered systems, and digital products for startups and businesses.
+            Software Developer & AI Engineer building production web applications, digital commerce experiences, and AI-powered systems for startups and businesses.
           </motion.p>
+
+          {/* Trust Line */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 0.7, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.8 }}
+            className="text-[10px] md:text-xs font-mono font-bold tracking-widest text-text-secondary mt-3 uppercase text-center lg:text-left"
+          >
+            BUILT REAL PRODUCTS FOR CONSUMER BRANDS & STARTUPS.
+          </motion.div>
 
           {/* Action CTAs */}
           <motion.div

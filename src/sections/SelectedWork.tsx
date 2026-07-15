@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { projects } from '../data/projects';
 import { ProjectShowcase } from '../components/ProjectShowcase';
 import { SectionTitle } from '../components/SectionTitle';
@@ -13,8 +14,19 @@ export const SelectedWork = ({ onViewCaseStudy }: SelectedWorkProps) => {
       {/* Title */}
       <SectionTitle
         label="01 / SELECTED WORK"
-        title="WORK THAT SPEAKS FOR ITSELF."
+        title="PRODUCTS I'VE BUILT FOR THE REAL WORLD."
       />
+
+      {/* Curated selection description */}
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+        className="text-text-secondary text-base md:text-lg max-w-2xl font-light -mt-8 mb-16 md:-mt-12 md:mb-20 leading-relaxed"
+      >
+        A selection of production websites and digital products I've built for businesses and real-world users.
+      </motion.p>
 
       {/* Showcases */}
       <div className="flex flex-col">

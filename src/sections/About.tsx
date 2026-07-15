@@ -60,7 +60,7 @@ export const About = ({ onScrollToContact }: AboutProps) => {
 
   const stats = [
     { value: 150, suffix: '+', label: 'DSA PROBLEMS SOLVED' },
-    { value: 4, suffix: '+', label: 'REAL PRODUCTS BUILT' },
+    { value: 3, suffix: '', label: 'FEATURED PRODUCTS' },
     { value: 3, suffix: '+', label: 'PROFESSIONAL EXPERIENCES' },
     { value: 100, suffix: '%', label: 'BUILDING & LEARNING' },
   ];
@@ -140,13 +140,13 @@ export const About = ({ onScrollToContact }: AboutProps) => {
             className="space-y-6 text-text-secondary text-base md:text-lg leading-relaxed font-light"
           >
             <p>
-              I'm Gagan Meshram, a Software Developer and AI Engineer focused on building scalable digital products and intelligent AI systems.
+              I'm Gagan Meshram, a Software Developer and AI Engineer focused on building real digital products.
             </p>
             <p>
-              My work combines software engineering, backend development, and artificial intelligence to solve real-world problems.
+              My work spans production e-commerce platforms, full-stack applications, backend systems, and AI-powered software.
             </p>
             <p>
-              From AI-powered document systems to full-stack applications, I focus on understanding the problem first and then building the right technical solution.
+              I focus on understanding the problem first, designing the right technical approach, and turning ideas into working products.
             </p>
           </motion.div>
 

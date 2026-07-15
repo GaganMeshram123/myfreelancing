@@ -9,9 +9,9 @@ export const services: ServiceData[] = [
   {
     number: "01",
     title: "AI & AGENTIC SYSTEMS",
-    description: "Building AI-powered applications using LLMs, RAG, AI Agents, LangGraph, and vector databases.",
+    description: "Building AI-powered applications using LLMs, Agentic RAG, AI Agents, LangGraph, and vector databases.",
     capabilities: [
-      "RAG Systems",
+      "Agentic RAG Systems",
       "AI Agents",
       "LLM Integration",
       "Semantic Search",
@@ -20,7 +20,7 @@ export const services: ServiceData[] = [
   },
   {
     number: "02",
-    title: "FULL STACK DEVELOPMENT",
+    title: "FULL STACK PRODUCT DEVELOPMENT",
     description: "Building modern scalable web applications with strong frontend and backend architecture.",
     capabilities: [
       "React Applications",
@@ -32,8 +32,21 @@ export const services: ServiceData[] = [
   },
   {
     number: "03",
+    title: "E-COMMERCE & PAYMENT INTEGRATION",
+    description: "Building modern commerce experiences with product workflows, cart systems, checkout experiences, and payment integrations for consumer brands and businesses.",
+    capabilities: [
+      "E-Commerce Development",
+      "Shopping Workflows",
+      "Cart & Checkout",
+      "Razorpay Integration",
+      "Payment Workflows",
+      "Production Deployment"
+    ]
+  },
+  {
+    number: "04",
     title: "BACKEND & API DEVELOPMENT",
-    description: "Building reliable backend systems and APIs for digital products.",
+    description: "Building reliable backend systems, microservices, and APIs for digital products.",
     capabilities: [
       "REST APIs",
       "FastAPI",
@@ -43,7 +56,7 @@ export const services: ServiceData[] = [
     ]
   },
   {
-    number: "04",
+    number: "05",
     title: "MVP DEVELOPMENT",
     description: "Helping startups turn product ideas into working MVPs.",
     capabilities: [

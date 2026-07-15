@@ -4,11 +4,13 @@ export interface ProjectCaseStudy {
   challenge: string;
   approach: string;
   solution: string;
-  architectureDesc: string;
-  architectureSteps: string[];
-  keyFeatures: string[];
+  architectureDesc?: string;
+  architectureSteps?: string[];
+  keyFeatures?: string[];
   results: string[];
   whatILearned: string;
+  performanceStat?: string;
+  paymentWorkflow?: boolean;
 }
 
 export interface ProjectData {
@@ -16,161 +18,123 @@ export interface ProjectData {
   number: string;
   title: string;
   category: string;
+  status: string;
+  headline: string;
   description: string;
-  tech: string[];
-  image: string; // Dynamic abstract image
-  liveUrl?: string;
+  tech: string[]; // capabilities
+  image: string; // local preview path
+  liveUrl: string;
   githubUrl?: string;
   caseStudy: ProjectCaseStudy;
 }
 
 export const projects: ProjectData[] = [
   {
-    id: "insight-engine",
+    id: "kashi-bite",
     number: "01",
-    title: "INSIGHT ENGINE",
-    category: "AGENTIC AI / RAG / DOCUMENT INTELLIGENCE",
-    description: "An intelligent document analysis platform powered by Agentic RAG, LangGraph, and Gemini LLM. The system retrieves contextual information and generates intelligent document insights.",
-    tech: ["Python", "LangGraph", "RAG", "Gemini", "Streamlit"],
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-    githubUrl: "https://github.com/GaganMeshram123",
+    title: "KASHI BITE",
+    category: "PRODUCTION E-COMMERCE / FOOD BRAND",
+    status: "LIVE PRODUCT • CLIENT WORK",
+    headline: "A DIGITAL COMMERCE EXPERIENCE FOR THE AUTHENTIC TASTE OF BANARAS.",
+    description: "Kashi Bite is a production e-commerce experience built for a food brand focused on bringing authentic Banarasi flavours to customers through a modern digital shopping journey. The platform creates a digital experience around the brand's traditional food products while supporting product discovery, shopping workflows, checkout, and payment-related experiences.",
+    tech: [
+      "PRODUCTION E-COMMERCE",
+      "PRODUCT DISCOVERY",
+      "SHOPPING EXPERIENCE",
+      "CART WORKFLOW",
+      "CHECKOUT EXPERIENCE",
+      "RAZORPAY INTEGRATION",
+      "PAYMENT WORKFLOW",
+      "RESPONSIVE EXPERIENCE",
+      "PRODUCTION DEPLOYMENT"
+    ],
+    image: "/projects/kashi-bite/homepage.png",
+    liveUrl: "https://www.kashibite.com/",
     caseStudy: {
-      overview: "Insight Engine was built to tackle the challenges of document analysis. Startups and enterprise companies process hundreds of heavy PDFs daily. Searching through them is tedious. Insight Engine acts as an AI analyst that reads, compiles, and retrieves intelligent, context-aware information from massive corpora instantly.",
-      problem: "Traditional keyword search fails to understand the semantic intent of questions in complex documents. Information is buried in tables, headers, and footnotes, making standard extraction processes highly inaccurate.",
-      challenge: "Building a pipeline that retains formatting context, parses complex tables, handles multi-document queries with zero cross-document pollution, and responds within seconds without hitting LLM token limits.",
-      approach: "I selected LangGraph for orchestration because the user journey requires a multi-step verification agent (routing, self-correction, hallucination-checking). The system parses documents into layout-aware markdown, embeds them using a dense vector encoder, and indexes them in a scalable vector store.",
-      solution: "An agentic RAG solution where a Query Rewriter refines the user's prompt, a Router agent determines which document indexes to query, a Retriever retrieves candidates, and a Grader agent evaluates the retrieval relevancy. If the answer is incomplete, it issues sub-queries.",
-      architectureDesc: "The workflow is powered by LangGraph state machine:",
-      architectureSteps: [
-        "Document ingestion engine parses PDF structure using layout analysis.",
-        "LangGraph routers check if the query requires external vector database lookup.",
-        "Relevance grader filters out irrelevant context blocks using structured outputs.",
-        "Gemini LLM synthesizes the final context-grounded response.",
-        "Hallucination evaluator verifies if claims are fully supported by source documents."
-      ],
-      keyFeatures: [
-        "Layout-Aware Parsing (extracts tables and structured lists cleanly)",
-        "Self-Corrective RAG (automatically rewrites search queries if results are weak)",
-        "Source Citation (links every generated claim to precise page numbers)",
-        "Dynamic Multi-Agent Orchestration (utilizes specialized agent nodes for grading)"
-      ],
+      overview: "Kashi Bite required more than a visually attractive brand website. The digital experience needed to communicate the brand, present traditional food products, and support a customer journey from product discovery toward purchase. I approached the project as a digital commerce product rather than only a website, ensuring a fast, clean, and reliable checkout experience.",
+      problem: "A customer visiting a consumer food brand website needs to quickly understand the brand, explore the products, and move through a clear shopping journey. The challenge was creating an experience that could balance traditional brand identity with a modern digital commerce workflow across discovery, cart management, and payment states.",
+      challenge: "Building a payment and checkout flow that remains consistent, handles failed transactions gracefully, provides clear feedback to users, and manages order state securely without exposing sensitive production keys.",
+      approach: "I structured the customer journey starting from brand discovery, moving to interactive product presentation (Murabbas, Pickles, Papads), and guiding the user through cart, checkout, and the Razorpay payment gateway integration.",
+      solution: "A complete production-grade e-commerce application featuring intuitive product discovery, responsive shopping workflows, Razorpay checkout, and an optimized order success/failure feedback loop.",
+      paymentWorkflow: true,
       results: [
-        "Reduced document review time by 82% for test clients.",
-        "Achieved a 95% accuracy rate on semantic search benchmarks.",
-        "Successfully deployed to production supporting files up to 500MB."
+        "Delivered a live, client-verified digital commerce platform.",
+        "Integrated Razorpay workflow supporting secure payments.",
+        "Maintained 100% responsive design across mobile and desktop screens."
       ],
-      whatILearned: "I learned how to build custom stateful agents in LangGraph, handle edge cases where retrievers return empty sets, and design custom prompts that strictly prevent hallucinations."
+      whatILearned: "I learned how to structure client-focused checkout flows, handle payment states reliably under varying network conditions, and align brand presentation with digital commerce requirements."
     }
   },
   {
-    id: "youtube-analyzer",
+    id: "gud-roots",
     number: "02",
-    title: "AI YOUTUBE COMMENT ANALYZER",
-    category: "AI / RAG / SENTIMENT ANALYSIS",
-    description: "An AI-powered system that analyzes YouTube comments, identifies audience sentiment, and retrieves contextual insights using a Retrieval-Augmented Generation pipeline.",
-    tech: ["Python", "ChromaDB", "RAG", "LLMs", "YouTube API"],
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80",
-    githubUrl: "https://github.com/GaganMeshram123",
+    title: "GUD ROOTS",
+    category: "PRODUCTION E-COMMERCE / CONSUMER BRAND",
+    status: "LIVE PRODUCT • CLIENT WORK",
+    headline: "BUILDING A MODERN DIGITAL STOREFRONT FOR A CONSUMER BRAND.",
+    description: "Gud Roots is a production-focused digital commerce experience built to showcase a modern consumer brand, present its product range, and provide customers with a smooth online shopping journey. The project combines responsive user experience, commerce workflows, backend-connected systems, payment integration, and production-focused performance work.",
+    tech: [
+      "PRODUCTION E-COMMERCE",
+      "PRODUCT PRESENTATION",
+      "SHOPPING WORKFLOWS",
+      "CART EXPERIENCE",
+      "CHECKOUT FLOW",
+      "RAZORPAY INTEGRATION",
+      "PAYMENT WORKFLOW",
+      "BACKEND SYSTEMS",
+      "PERFORMANCE OPTIMIZATION",
+      "RESPONSIVE EXPERIENCE",
+      "PRODUCTION DEPLOYMENT"
+    ],
+    image: "/projects/gud-roots/homepage.png",
+    liveUrl: "https://www.gudroots.in/",
     caseStudy: {
-      overview: "Creators and marketers struggle to read through thousands of comments to extract actionable video feedback, feature requests, or bugs. The AI YouTube Comment Analyzer aggregates comment threads, processes them in real-time, and exposes a natural language interface to query audience feedback.",
-      problem: "YouTube comments are chaotic, full of emojis, slang, and spam. Categorizing them manually is impossible for high-subscriber channels, leading to missed feedback and opportunities.",
-      challenge: "Handling API rate limits, filtering spam comments efficiently before embedding, and clustering comments into structured sentiment categories in real-time.",
-      approach: "Built a pipeline that pulls comments using the YouTube API, filters spam using basic heuristics, stores embeddings in ChromaDB, and runs sentiment analysis using lightweight local models, with summary generation handled by an LLM.",
-      solution: "A web dashboard where users input a video URL. The app automatically fetches comments, visualizes overall sentiment metrics (positive, neutral, negative), and enables users to chat with the comment database (e.g., 'What did users say about the audio quality?').",
-      architectureDesc: "A complete streaming ingestion and query loop:",
-      architectureSteps: [
-        "YouTube Data API fetches all comment threads asynchronously.",
-        "Cleaning scripts strip out links, bot spam, and system noise.",
-        "Text chunks are vectorized using sentence-transformers and indexed in ChromaDB.",
-        "Sentiment metrics are calculated using a custom classification model.",
-        "RAG loop searches ChromaDB index and generates contextual summaries."
-      ],
-      keyFeatures: [
-        "Real-Time Sentiment Dashboard (interactive charts showing audience mood)",
-        "Semantic Search (find common suggestions or bugs without matching exact words)",
-        "Spam Filtration (removes automated channel links and bot scripts)",
-        "CSV/PDF Reporting (export audience reports for brand partners)"
-      ],
+      overview: "Gud Roots is a production digital commerce project for a modern consumer brand. The brand focuses on premium IQF frozen fruits, berries, vegetables, and natural preservative-free cold-chain products. The project involved creating a modern digital experience around the brand and its product offering.",
+      problem: "A modern consumer brand needs a digital experience that clearly presents its products and makes the online shopping journey simple. The project required balancing brand presentation, product discovery, responsive experience, commerce workflows, and production performance.",
+      challenge: "Optimizing cold-chain product listings and media assets to ensure fast page loads while maintaining high-resolution product imagery for premium berries and frozen vegetables.",
+      approach: "Focused on product presentation and a smooth customer journey. Designed a responsive interface, backend-connected workflows, and implemented Razorpay for payment processing, followed by intense frontend asset and code-splitting performance optimization.",
+      solution: "A highly optimized, production-grade commerce application that integrates secure payment initiation, success/failure state handling, and a fast, responsive interface.",
+      performanceStat: "35%",
       results: [
-        "Enabled creators to get a video summary in less than 30 seconds.",
-        "Helped a tech creator identify a major editing mistake in a video within 10 minutes of upload.",
-        "Processed over 100,000 comments across testing runs without performance lag."
+        "Achieved a 35% load time improvement through asset compression and route optimization.",
+        "Deployed a fully operational checkout and payment loop.",
+        "Successfully launched a secure digital storefront for client production use."
       ],
-      whatILearned: "Working with the YouTube API taught me the details of paginated fetches and rate limits. I also gained experience fine-tuning vector database indexing parameters in ChromaDB for short texts."
+      whatILearned: "Optimizing Gud Roots sharpened my skills in asset delivery optimization, cold-chain metadata management, and frontend performance metrics that directly impact customer conversion rates."
     }
   },
   {
     id: "collegespace",
     number: "03",
     title: "COLLEGESPACE",
-    category: "FULL STACK WEB APPLICATION",
-    description: "A collaborative study material sharing platform designed for college students to discover and share academic resources.",
-    tech: ["React", "Node.js", "Express", "Database", "REST API"],
-    image: "https://images.unsplash.com/photo-1618005198143-e5283b519a7f?auto=format&fit=crop&w=1200&q=80",
-    githubUrl: "https://github.com/GaganMeshram123",
+    category: "FULL STACK WEB APPLICATION / EDTECH",
+    status: "LIVE PRODUCT • FULL STACK",
+    headline: "MAKING STUDY MATERIALS EASIER TO DISCOVER AND SHARE.",
+    description: "CollegeSpace is a full-stack study material sharing platform built to help college students discover, access, and share academic resources through a centralized digital experience. The product focuses on solving the problem of fragmented study materials and making useful academic resources easier for students to discover.",
+    tech: [
+      "FULL STACK DEVELOPMENT",
+      "RESOURCE DISCOVERY",
+      "STUDY MATERIAL SHARING",
+      "REST APIs",
+      "BACKEND DEVELOPMENT",
+      "RESPONSIVE WEB APPLICATION",
+      "STUDENT-FOCUSED UX"
+    ],
+    image: "/projects/collegespace/homepage.png",
+    liveUrl: "https://collegespace-gray.vercel.app/",
+    githubUrl: "https://github.com/GaganMeshram123/myfreelancing",
     caseStudy: {
-      overview: "College students often struggle to locate past exams, lecture notes, and syllabus guidelines. CollegeSpace consolidates these resources into a highly organized, community-driven database where students upload, rate, and discover materials for their specific courses.",
-      problem: "Academics materials are scattered across Google Drive folders, WhatsApp groups, and Discord servers. Finding a specific note right before exams is stressful and time-consuming.",
-      challenge: "Creating a reliable upload, storage, and indexing system that handles varying file types (PDFs, DOCs, images) and ensures high security against malicious uploads.",
-      approach: "I structured the database to group files by University, Department, Course, and Semester. The frontend is built with React for fast client-side filtering, and the backend is powered by Node.js/Express.",
-      solution: "A responsive platform featuring instant search, filter by course codes, peer ratings, and an optimized download pipeline that saves bandwidth. Admin dashboards handle moderation of uploaded content.",
-      architectureDesc: "A clean MVC-style architecture:",
-      architectureSteps: [
-        "React frontend implements debounced search and tags for instantaneous filtering.",
-        "NodeJS REST API handles authentication, search requests, and metadata storage.",
-        "File upload manager verifies file integrity and uploads them to a secure cloud bucket.",
-        "Database stores relational tags, ratings, user profiles, and file metadata.",
-        "Moderation worker flags documents containing inappropriate content."
-      ],
-      keyFeatures: [
-        "Instant Tag-Based Search (filter by semester or course code in milliseconds)",
-        "Community Review System (upvote useful notes and downvote spam)",
-        "Secure PDF Viewer (read study materials directly inside the browser)",
-        "User Contribution Dashboard (gamified profile metrics showing uploads and views)"
-      ],
+      overview: "CollegeSpace started from a problem I could clearly see around students: useful academic resources were available, but they were often scattered across different messages, people, and links. The goal was to create a centralized digital experience where study materials could become easier to discover and access.",
+      problem: "STUDY MATERIALS WERE EVERYWHERE. FINDING THEM WAS THE PROBLEM. College students often search for academic resources through WhatsApp groups, classmates, old messages, and scattered links. Study resources become fragmented, making search stressful and inefficient.",
+      challenge: "Creating a reliable resource discovery mechanism that goes beyond simple file uploads, focusing on indexing, tags, university semesters, and clean organization.",
+      approach: "I structured the product around the student journey. Designed a centralized React.js frontend connected to a REST API running on a Node.js/Express.js backend, coupled with a robust relational data layer.",
+      solution: "A full-stack, responsive web application allowing students to browse resources by department/semester, download PDFs, upload new materials, and search instantly.",
       results: [
-        "Adopted by 500+ active students in its first month of launch.",
-        "Over 1,200 study resources uploaded and indexed within the system.",
-        "Average search-to-download time reduced to under 10 seconds."
+        "Created a unified, searchable repository for academic notes.",
+        "Implemented a scalable REST API architecture for document indexing.",
+        "Developed a responsive student dashboard for file uploads and sharing."
       ],
-      whatILearned: "I learned how to manage file storage pipelines, configure cloud buckets, implement proper token-based authentication (JWT), and write optimized database queries to handle complex filtering combinations."
-    }
-  },
-  {
-    id: "scatch-bags",
-    number: "04",
-    title: "SCATCH BAGS",
-    category: "E-COMMERCE / MERN",
-    description: "A modern full-stack e-commerce application with authentication, product management, shopping workflows, and backend APIs.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80",
-    githubUrl: "https://github.com/GaganMeshram123",
-    caseStudy: {
-      overview: "Scatch Bags is a premium digital store built using the MERN stack. Designed with smooth, minimal aesthetics to showcase and retail designer bags, the platform handles user authentication, dynamic shopping carts, order checkouts, and admin catalogs.",
-      problem: "E-commerce stores often feel bloated, slow, and full of complex visual noise, which distracts customers and hurts conversions.",
-      challenge: "Synchronizing cart state across browser sessions safely, managing database schemas for dynamic product pricing, and securing checkout APIs.",
-      approach: "Focused on an ultra-minimal user interface with micro-interactions. Used MongoDB to manage highly structured catalogs and user schemas, and styled the UI using modular custom CSS.",
-      solution: "A modern shopping experience. The platform includes smooth page transitions, instant cart updates, secure JWT-based login, and a dashboard for admins to manage stock, add products, and track orders.",
-      architectureDesc: "The standard MERN workflow:",
-      architectureSteps: [
-        "React SPA manages local state (cart, user, product lists) using Context API.",
-        "Express server processes security tokens and queries catalog schemas.",
-        "MongoDB stores user credentials, hashed passwords, product documents, and order history.",
-        "Asset processor compresses and manages product images for optimized loading.",
-        "API gateway handles checkout processing and returns transaction confirmations."
-      ],
-      keyFeatures: [
-        "Minimalist UX/UI (fluid animations and zero layout clutter)",
-        "Robust Shopping Cart (handles live quantity edits and session sync)",
-        "Admin Portal (add, edit, or delete items and view real-time sale logs)",
-        "Token Authentication (secure, encrypted user accounts and password hashing)"
-      ],
-      results: [
-        "Achieved a 95+ PageSpeed score due to highly optimized code and asset compression.",
-        "100% functional checkout loop tested across standard developer pipelines.",
-        "Highly clean, modular codebase easily expandable for external payment gateways."
-      ],
-      whatILearned: "This project sharpened my knowledge of state management in React, Mongoose schema modeling, password security, and designing web APIs that follow REST standards."
+      whatILearned: "Building CollegeSpace taught me the importance of full-stack API design, debounced search filters, and matching product thinking with student user experience workflows."
     }
   }
 ];

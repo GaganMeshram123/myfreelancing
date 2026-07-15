@@ -4,8 +4,7 @@ import { useIsTouchDevice } from '../hooks/useMediaQuery';
 
 export const CustomCursor = () => {
   const isTouchDevice = useIsTouchDevice();
-  const [hovered, setHovered] = useState(false);
-  const [projectHovered, setProjectHovered] = useState(false);
+  const [cursorType, setCursorType] = useState<'default' | 'hover' | 'project' | 'explore' | 'open'>('default');
   const [visible, setVisible] = useState(false);
 
   // Position coordinates
@@ -30,32 +29,30 @@ export const CustomCursor = () => {
       const target = e.target as HTMLElement;
       if (!target) return;
 
-      // Check if hovering over links, buttons, or custom interactive items
+      const projectEl = target.closest('[data-cursor="project"]');
+      const exploreEl = target.closest('[data-cursor="explore"]') || (target.closest('button') && target.textContent?.includes('CASE STUDY'));
+      const openEl = target.closest('[data-cursor="open"]') || (target.closest('a') && target.getAttribute('target') === '_blank');
       const isLink = target.closest('a, button, [role="button"], input, select, textarea, .cursor-pointer');
-      if (isLink) {
-        setHovered(true);
-      }
 
-      // Check if hovering over project showcase container
-      const isProject = target.closest('[data-cursor="project"]');
-      if (isProject) {
-        setProjectHovered(true);
+      if (projectEl) {
+        setCursorType('project');
+      } else if (exploreEl) {
+        setCursorType('explore');
+      } else if (openEl) {
+        setCursorType('open');
+      } else if (isLink) {
+        setCursorType('hover');
+      } else {
+        setCursorType('default');
       }
     };
 
     const handleMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target) return;
-
-      const isLink = target.closest('a, button, [role="button"], input, select, textarea, .cursor-pointer');
-      if (isLink) {
-        setHovered(false);
-      }
-
-      const isProject = target.closest('[data-cursor="project"]');
-      if (isProject) {
-        setProjectHovered(false);
-      }
+      
+      // Reset back to default if leaving interactive elements
+      setCursorType('default');
     };
 
     const handleMouseLeaveWindow = () => {
@@ -87,6 +84,40 @@ export const CustomCursor = () => {
 
   if (isTouchDevice || !visible) return null;
 
+  // Determine size, color, background, and border based on active type
+  const isLarge = cursorType === 'project' || cursorType === 'explore' || cursorType === 'open';
+  const width = isLarge ? 90 : cursorType === 'hover' ? 45 : 24;
+  const height = isLarge ? 90 : cursorType === 'hover' ? 45 : 24;
+
+  const getBackgroundColor = () => {
+    switch (cursorType) {
+      case 'project': return 'rgba(6, 182, 212, 0.12)';
+      case 'explore': return 'rgba(139, 92, 246, 0.12)';
+      case 'open': return 'rgba(16, 185, 129, 0.12)';
+      case 'hover': return 'rgba(59, 130, 246, 0.05)';
+      default: return 'rgba(255, 255, 255, 0)';
+    }
+  };
+
+  const getBorderColor = () => {
+    switch (cursorType) {
+      case 'project': return '#06B6D4';
+      case 'explore': return '#8B5CF6';
+      case 'open': return '#10B981';
+      case 'hover': return '#3B82F6';
+      default: return '#8B5CF6';
+    }
+  };
+
+  const getTextColor = () => {
+    switch (cursorType) {
+      case 'project': return '#06B6D4';
+      case 'explore': return '#8B5CF6';
+      case 'open': return '#10B981';
+      default: return 'transparent';
+    }
+  };
+
   return (
     <>
       {/* Small center dot */}
@@ -102,7 +133,7 @@ export const CustomCursor = () => {
 
       {/* Larger circular follower */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border border-accent-purple/60 pointer-events-none z-[9998] flex items-center justify-center overflow-hidden"
+        className="fixed top-0 left-0 rounded-full border pointer-events-none z-[9998] flex items-center justify-center overflow-hidden"
         style={{
           x: followerX,
           y: followerY,
@@ -110,28 +141,43 @@ export const CustomCursor = () => {
           translateY: '-50%',
         }}
         animate={{
-          width: projectHovered ? 90 : hovered ? 45 : 24,
-          height: projectHovered ? 90 : hovered ? 45 : 24,
-          backgroundColor: projectHovered
-            ? 'rgba(139, 92, 246, 0.15)'
-            : hovered
-            ? 'rgba(59, 130, 246, 0.05)'
-            : 'rgba(255, 255, 255, 0)',
-          borderColor: projectHovered
-            ? '#06B6D4'
-            : hovered
-            ? '#3B82F6'
-            : '#8B5CF6',
+          width,
+          height,
+          backgroundColor: getBackgroundColor(),
+          borderColor: getBorderColor(),
         }}
         transition={{ type: 'tween', ease: 'backOut', duration: 0.3 }}
       >
-        {projectHovered && (
+        {cursorType === 'project' && (
           <motion.span
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-[10px] font-bold tracking-widest text-[#06B6D4] text-center uppercase whitespace-nowrap"
+            className="text-[10px] font-bold tracking-widest text-center uppercase whitespace-nowrap font-mono"
+            style={{ color: getTextColor() }}
           >
-            VIEW<br />PROJECT
+            VIEW<br />LIVE
+          </motion.span>
+        )}
+
+        {cursorType === 'explore' && (
+          <motion.span
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-[10px] font-bold tracking-widest text-center uppercase whitespace-nowrap font-mono"
+            style={{ color: getTextColor() }}
+          >
+            EXPLORE
+          </motion.span>
+        )}
+
+        {cursorType === 'open' && (
+          <motion.span
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-[10px] font-bold tracking-widest text-center uppercase whitespace-nowrap font-mono"
+            style={{ color: getTextColor() }}
+          >
+            OPEN ↗
           </motion.span>
         )}
       </motion.div>
