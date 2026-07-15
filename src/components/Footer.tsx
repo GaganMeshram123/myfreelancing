@@ -33,7 +33,7 @@ export const Footer = () => {
       url: 'https://www.youtube.com/@GAGANMESHRAM8255',
       label: 'YouTube'
     },
-    { icon: <Mail className="w-5 h-5" />, url: 'mailto:meshr.gagan@gmail.com', label: 'Email' },
+    { icon: <Mail className="w-5 h-5" />, url: 'mailto:meshram.gagan.510@gmail.com', label: 'Email' },
   ];
 
   const handleBackToTop = () => {

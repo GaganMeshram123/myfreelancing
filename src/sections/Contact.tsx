@@ -61,7 +61,7 @@ export const Contact = () => {
           </MagneticButton>
 
           <a
-            href="mailto:meshr.gagan@gmail.com"
+            href="mailto:meshram.gagan.510@gmail.com"
             className="text-xs font-semibold tracking-wider text-text-secondary hover:text-text-primary border-b border-text-primary/10 hover:border-text-primary pb-0.5 transition-colors duration-300"
           >
             OR EMAIL ME DIRECTLY
