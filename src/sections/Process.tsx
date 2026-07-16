@@ -2,6 +2,8 @@ import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'framer-motion';
 import { SectionTitle } from '../components/SectionTitle';
 import { Process3D } from '../three/Process3D';
+import { useIsMobile } from '../hooks/useMediaQuery';
+import { motion } from 'framer-motion';
 
 interface StepProps {
   number: string;
@@ -15,7 +17,7 @@ const StepCard = ({ number, title, description, isActive, onVisible }: StepProps
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, {
     once: false,
-    margin: '-35% 0px -35% 0px', // Triggers when in the center 30% of the viewport
+    margin: '-35% 0px -35% 0px', // Triggers when in the center of the viewport
   });
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const StepCard = ({ number, title, description, isActive, onVisible }: StepProps
   return (
     <div
       ref={cardRef}
-      className={`min-h-[220px] py-8 border-l border-text-primary/5 pl-6 md:pl-10 transition-all duration-500 relative select-none ${
+      className={`min-h-[200px] py-8 border-l border-text-primary/5 pl-6 md:pl-10 transition-all duration-500 relative select-none ${
         isActive ? 'border-accent-blue' : 'opacity-30'
       }`}
     >
@@ -53,6 +55,7 @@ const StepCard = ({ number, title, description, isActive, onVisible }: StepProps
 
 export const Process = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const isMobile = useIsMobile();
 
   const steps = [
     {
@@ -83,7 +86,7 @@ export const Process = () => {
   ];
 
   return (
-    <section id="process" className="w-full py-20 px-6 md:px-12 max-w-7xl mx-auto relative overflow-hidden">
+    <section id="process" className="w-full py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto relative overflow-hidden">
       
       {/* Title */}
       <SectionTitle
@@ -91,28 +94,57 @@ export const Process = () => {
         title="HOW WE TURN YOUR IDEA INTO REALITY."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mt-12 md:mt-16">
-        
-        {/* Left Side: Sticky 3D Process Object */}
-        <div className="lg:col-span-5 lg:sticky lg:top-32 h-[300px] md:h-[450px] flex items-center justify-center bg-[#0A0A0A]/40 rounded-3xl border border-text-primary/5 overflow-hidden">
-          <Process3D activeStep={activeStep} />
-        </div>
+      {/* Desktop/Tablet: Split 3D Sticky scroll. Mobile: Static Vertical Cards */}
+      {!isMobile ? (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mt-12 md:mt-16">
+          {/* Left Side: Sticky 3D Process Object */}
+          <div className="lg:col-span-5 lg:sticky lg:top-32 h-[300px] md:h-[450px] flex items-center justify-center bg-[#0A0A0A]/40 rounded-3xl border border-text-primary/5 overflow-hidden">
+            <Process3D activeStep={activeStep} />
+          </div>
 
-        {/* Right Side: Scroll Steps */}
-        <div className="lg:col-span-7 flex flex-col pl-4 lg:pl-12">
+          {/* Right Side: Scroll Steps */}
+          <div className="lg:col-span-7 flex flex-col pl-4 lg:pl-12">
+            {steps.map((step, index) => (
+              <StepCard
+                key={step.number}
+                number={step.number}
+                title={step.title}
+                description={step.description}
+                isActive={activeStep === index}
+                onVisible={() => setActiveStep(index)}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 mt-8">
           {steps.map((step, index) => (
-            <StepCard
+            <motion.div
               key={step.number}
-              number={step.number}
-              title={step.title}
-              description={step.description}
-              isActive={activeStep === index}
-              onVisible={() => setActiveStep(index)}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              className="glass p-6 rounded-2xl border border-text-primary/5 space-y-4 shadow-sm"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono text-accent-blue font-bold tracking-widest">
+                  {step.number}
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan"></span>
+              </div>
+              <div>
+                <h3 className="text-lg font-extrabold tracking-tight text-text-primary uppercase">
+                  {step.title}
+                </h3>
+                <p className="text-text-secondary text-sm font-light leading-relaxed mt-2">
+                  {step.description}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
-
-      </div>
+      )}
     </section>
   );
 };

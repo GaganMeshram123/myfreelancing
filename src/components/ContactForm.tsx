@@ -232,12 +232,12 @@ export const ContactForm = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="pt-4 flex justify-end">
-              <MagneticButton strength={0.2}>
+            <div className="pt-4 flex justify-end w-full">
+              <MagneticButton strength={0.2} className="w-full md:w-auto">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-text-primary text-background font-bold tracking-widest text-xs px-8 py-4 rounded hover:bg-accent-blue hover:text-text-primary transition-all duration-300 flex items-center space-x-2 w-full md:w-auto justify-center"
+                  className="bg-text-primary text-background font-bold tracking-widest text-xs px-8 py-4 rounded hover:bg-accent-blue hover:text-text-primary transition-all duration-300 flex items-center space-x-2 w-full md:w-auto justify-center min-h-[48px]"
                 >
                   {isSubmitting ? (
                     <>

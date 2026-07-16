@@ -84,7 +84,7 @@ export const About = ({ onScrollToContact }: AboutProps) => {
         
         {/* Left Col: Giant Typography */}
         <div ref={leftRef} className="lg:col-span-5 select-none">
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-text-primary leading-[1.08]">
+          <h2 className="text-clamp-hero font-extrabold tracking-tight text-text-primary leading-[1.08]">
             <span className="inline-block overflow-hidden mr-3">
               <motion.span
                 initial={{ y: '100%' }}
@@ -137,7 +137,7 @@ export const About = ({ onScrollToContact }: AboutProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={isRightInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="space-y-6 text-text-secondary text-base md:text-lg leading-relaxed font-light"
+            className="space-y-6 text-text-secondary text-clamp-body leading-relaxed font-light"
           >
             <p>
               I'm Gagan Meshram, a Software Developer and AI Engineer focused on building real digital products.

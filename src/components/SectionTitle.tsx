@@ -27,7 +27,7 @@ export const SectionTitle = ({ label, title, className = '' }: SectionTitleProps
       </motion.div>
 
       {/* Main Title Heading with Word Reveal */}
-      <h2 className="text-3xl md:text-6xl font-extrabold tracking-tight text-text-primary leading-tight">
+      <h2 className="text-clamp-hero font-extrabold tracking-tight text-text-primary leading-tight">
         {words.map((word, index) => (
           <span key={index} className="inline-block overflow-hidden mr-3">
             <motion.span

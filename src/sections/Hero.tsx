@@ -23,11 +23,11 @@ export const Hero = ({ onScrollToWork, onScrollToContact }: HeroProps) => {
   return (
     <section id="home" className="relative min-h-screen w-full flex flex-col justify-center pt-24 pb-12 select-none overflow-hidden">
       
-      {/* 3D floating technology words */}
+      {/* 3D floating technology words (hidden on mobile) */}
       {floatingKeywords.map((kw, i) => (
         <motion.div
           key={i}
-          className="absolute text-[10px] md:text-xs font-mono font-bold tracking-widest text-text-primary/15 pointer-events-none select-none z-0"
+          className="absolute text-[10px] md:text-xs font-mono font-bold tracking-widest text-text-primary/15 pointer-events-none select-none z-0 hidden md:block"
           style={{ top: kw.top, left: kw.left }}
           animate={{
             y: [0, -18, 0],
@@ -49,7 +49,7 @@ export const Hero = ({ onScrollToWork, onScrollToContact }: HeroProps) => {
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
         
         {/* Left Side: Typography */}
-        <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left">
+        <div className="lg:col-span-7 flex flex-col justify-center order-1 lg:order-1 text-center lg:text-left items-center lg:items-start">
           
           {/* Availability Indicator */}
           <motion.div
@@ -72,7 +72,7 @@ export const Hero = ({ onScrollToWork, onScrollToContact }: HeroProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8, ease: [0.215, 0.610, 0.355, 1] }}
-            className="text-4xl md:text-6xl lg:text-[76px] font-black tracking-tight text-text-primary leading-[1.05] mt-6 select-none"
+            className="text-clamp-hero font-black tracking-tight text-text-primary mt-6 select-none"
           >
             I BUILD{' '}
             <span className="bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan bg-clip-text text-transparent animate-pulse-slow">
@@ -86,7 +86,7 @@ export const Hero = ({ onScrollToWork, onScrollToContact }: HeroProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-text-secondary text-base md:text-lg max-w-xl font-light leading-relaxed mt-6 mx-auto lg:mx-0"
+            className="text-text-secondary text-clamp-body max-w-xl font-light leading-relaxed mt-6 mx-auto lg:mx-0"
           >
             Software Developer & AI Engineer building production web applications, digital commerce experiences, and AI-powered systems for startups and businesses.
           </motion.p>
@@ -106,22 +106,22 @@ export const Hero = ({ onScrollToWork, onScrollToContact }: HeroProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mt-8"
+            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mt-8 w-full"
           >
-            <MagneticButton strength={0.25}>
+            <MagneticButton strength={0.25} className="w-full sm:w-auto">
               <button
                 onClick={onScrollToContact}
-                className="bg-text-primary text-background font-bold tracking-widest text-xs px-8 py-4 rounded hover:bg-accent-blue hover:text-text-primary transition-all duration-300 flex items-center space-x-2 w-[220px] sm:w-auto justify-center"
+                className="bg-text-primary text-background font-bold tracking-widest text-clamp-button px-8 py-4 rounded hover:bg-accent-blue hover:text-text-primary transition-all duration-300 flex items-center space-x-2 w-full sm:w-auto justify-center min-h-[48px]"
               >
                 <span>START A PROJECT</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>
             </MagneticButton>
 
-            <MagneticButton strength={0.25}>
+            <MagneticButton strength={0.25} className="w-full sm:w-auto">
               <button
                 onClick={onScrollToWork}
-                className="glass text-text-primary border border-text-primary/10 hover:border-text-primary font-bold tracking-widest text-xs px-8 py-4 rounded transition-all duration-300 flex items-center space-x-2 w-[220px] sm:w-auto justify-center"
+                className="glass text-text-primary border border-text-primary/10 hover:border-text-primary font-bold tracking-widest text-clamp-button px-8 py-4 rounded transition-all duration-300 flex items-center space-x-2 w-full sm:w-auto justify-center min-h-[48px]"
               >
                 <span>VIEW MY WORK</span>
                 <ArrowDown className="w-4 h-4" />
@@ -135,7 +135,7 @@ export const Hero = ({ onScrollToWork, onScrollToContact }: HeroProps) => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1 }}
-          className="lg:col-span-5 h-[350px] md:h-[500px] w-full flex items-center justify-center order-1 lg:order-2"
+          className="lg:col-span-5 h-[220px] sm:h-[300px] md:h-[400px] lg:h-[500px] w-full flex items-center justify-center order-2 lg:order-2"
         >
           <AICore />
         </motion.div>

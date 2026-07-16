@@ -1,18 +1,50 @@
 import { useRef } from 'react';
 import { motion, useScroll, useSpring, useInView } from 'framer-motion';
 import { experiences } from '../data/experience';
+import { useIsMobile } from '../hooks/useMediaQuery';
 
 interface TimelineItemProps {
   exp: typeof experiences[0];
   index: number;
+  isMobile: boolean;
 }
 
-const TimelineItem = ({ exp, index }: TimelineItemProps) => {
+const TimelineItem = ({ exp, index, isMobile }: TimelineItemProps) => {
   const itemRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(itemRef, { once: true, margin: '-10%' });
 
   // Alternate alignments on desktop
   const isEven = index % 2 === 0;
+
+  if (isMobile) {
+    return (
+      <motion.div
+        ref={itemRef}
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="w-full my-6 select-none"
+      >
+        <div className="glass-premium p-6 rounded-xl border-l-4 border-l-accent-blue border-y border-r border-text-primary/5 relative hover:border-accent-purple/30 transition-colors duration-300">
+          <span className="text-xs font-mono text-accent-cyan tracking-wider font-bold">
+            {exp.duration}
+          </span>
+          <h3 className="text-xl font-extrabold text-text-primary mt-1">
+            {exp.company}
+          </h3>
+          <h4 className="text-sm font-semibold text-accent-blue uppercase tracking-widest mt-0.5 font-mono">
+            {exp.role}
+          </h4>
+          <p className="text-xs text-text-secondary mt-1 tracking-wider italic">
+            {exp.tagline}
+          </p>
+          <p className="text-text-secondary text-sm font-light leading-relaxed mt-4">
+            {exp.description}
+          </p>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <div
@@ -67,6 +99,7 @@ const TimelineItem = ({ exp, index }: TimelineItemProps) => {
 
 export const ExperienceTimeline = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   // Monitor scroll progress for line filling
   const { scrollYProgress } = useScroll({
@@ -82,19 +115,23 @@ export const ExperienceTimeline = () => {
 
   return (
     <div ref={timelineRef} className="relative w-full max-w-4xl mx-auto px-4 md:px-0">
-      {/* Central Timeline Vertical Line */}
-      <div className="absolute left-[13px] md:left-1/2 top-0 bottom-0 w-[2px] bg-text-primary/5 transform -translate-x-[1px]" />
-      
-      {/* Filled dynamic line on scroll */}
-      <motion.div
-        className="absolute left-[13px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-blue via-accent-purple to-accent-cyan origin-top transform -translate-x-[1px]"
-        style={{ scaleY }}
-      />
+      {/* Central Timeline Vertical Line (hidden on mobile) */}
+      {!isMobile && (
+        <>
+          <div className="absolute left-[13px] md:left-1/2 top-0 bottom-0 w-[2px] bg-text-primary/5 transform -translate-x-[1px]" />
+          
+          {/* Filled dynamic line on scroll */}
+          <motion.div
+            className="absolute left-[13px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-blue via-accent-purple to-accent-cyan origin-top transform -translate-x-[1px]"
+            style={{ scaleY }}
+          />
+        </>
+      )}
 
       {/* Timeline entries */}
-      <div className="relative">
+      <div className="relative flex flex-col space-y-4 md:space-y-0">
         {experiences.map((exp, index) => (
-          <TimelineItem key={index} exp={exp} index={index} />
+          <TimelineItem key={index} exp={exp} index={index} isMobile={isMobile} />
         ))}
       </div>
     </div>

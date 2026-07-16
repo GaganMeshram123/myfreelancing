@@ -40,11 +40,11 @@ export const ProjectShowcase = ({ project, onViewCaseStudy }: ProjectShowcasePro
   return (
     <div
       ref={inViewRef}
-      className="w-full min-h-screen py-16 flex flex-col justify-center border-b border-text-primary/5 last:border-b-0"
+      className="w-full py-8 md:py-20 md:min-h-screen flex flex-col justify-center border-b border-text-primary/5 last:border-b-0"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Project Info Panel */}
-        <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1">
+        <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 items-center lg:items-start text-center lg:text-left">
           {/* Number */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -123,24 +123,24 @@ export const ProjectShowcase = ({ project, onViewCaseStudy }: ProjectShowcasePro
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="flex flex-wrap gap-4 mt-8"
+            className="flex flex-col sm:flex-row gap-4 mt-8 w-full"
           >
-            <MagneticButton>
+            <MagneticButton className="w-full sm:w-auto">
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-text-primary text-background font-bold tracking-widest text-xs px-6 py-3.5 rounded hover:bg-accent-blue hover:text-white transition-colors duration-300 flex items-center space-x-2"
+                className="bg-text-primary text-background font-bold tracking-widest text-xs px-6 py-3.5 rounded hover:bg-accent-blue hover:text-white transition-colors duration-300 flex items-center space-x-2 w-full sm:w-auto justify-center min-h-[48px]"
               >
                 <span>VISIT LIVE WEBSITE</span>
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </MagneticButton>
 
-            <MagneticButton>
+            <MagneticButton className="w-full sm:w-auto">
               <button
                 onClick={() => onViewCaseStudy(project.id)}
-                className="glass text-text-primary border border-text-primary/10 hover:border-text-primary font-bold tracking-widest text-xs px-6 py-3.5 rounded transition-colors duration-300 flex items-center space-x-2"
+                className="glass text-text-primary border border-text-primary/10 hover:border-text-primary font-bold tracking-widest text-xs px-6 py-3.5 rounded transition-colors duration-300 flex items-center space-x-2 w-full sm:w-auto justify-center min-h-[48px]"
               >
                 <span>VIEW CASE STUDY</span>
               </button>

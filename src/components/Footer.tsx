@@ -73,7 +73,7 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="w-10 h-10 rounded-full border border-text-primary/10 flex items-center justify-center text-text-secondary hover:text-text-primary hover:border-text-primary transition-colors duration-300"
+                className="w-12 h-12 rounded-full border border-text-primary/10 flex items-center justify-center text-text-secondary hover:text-text-primary hover:border-text-primary transition-colors duration-300 min-w-[48px] min-h-[48px]"
               >
                 {link.icon}
               </a>
@@ -85,7 +85,7 @@ export const Footer = () => {
             <MagneticButton strength={0.25}>
               <button
                 onClick={handleBackToTop}
-                className="w-12 h-12 rounded-full border border-text-primary/10 flex items-center justify-center text-text-primary hover:bg-text-primary hover:text-background hover:border-text-primary transition-colors duration-300"
+                className="w-12 h-12 rounded-full border border-text-primary/10 flex items-center justify-center text-text-primary hover:bg-text-primary hover:text-background hover:border-text-primary transition-colors duration-300 min-w-[48px] min-h-[48px]"
                 aria-label="Scroll to top"
               >
                 <ArrowUp className="w-5 h-5 animate-bounce" style={{ animationDuration: '3s' }} />

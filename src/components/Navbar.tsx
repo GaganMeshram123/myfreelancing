@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
+import { ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
@@ -24,6 +24,18 @@ export const Navbar = ({ onNavigate, isCaseStudyPage = false }: NavbarProps) => 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [mobileMenuOpen]);
 
   const navItems = [
     { label: 'Home', target: 'home' },
@@ -125,10 +137,14 @@ export const Navbar = ({ onNavigate, isCaseStudyPage = false }: NavbarProps) => 
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-text-primary p-2 focus:outline-none z-50"
+              className="text-text-primary p-3 focus:outline-none z-50 flex items-center justify-center min-w-[48px] min-h-[48px]"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <div className="w-6 h-4 flex flex-col justify-between items-end relative">
+                <span className={`h-[2px] bg-text-primary transition-all duration-300 rounded-full ${mobileMenuOpen ? 'w-6 absolute top-2 rotate-45' : 'w-6'}`}></span>
+                <span className={`h-[2px] bg-text-primary transition-all duration-300 rounded-full ${mobileMenuOpen ? 'w-0 opacity-0' : 'w-4'}`}></span>
+                <span className={`h-[2px] bg-text-primary transition-all duration-300 rounded-full ${mobileMenuOpen ? 'w-6 absolute top-2 -rotate-45' : 'w-5'}`}></span>
+              </div>
             </button>
           </div>
         </div>

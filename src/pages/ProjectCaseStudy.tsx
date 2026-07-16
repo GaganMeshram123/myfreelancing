@@ -96,7 +96,7 @@ export const ProjectCaseStudy = ({
               <span className="text-xs font-mono font-bold tracking-widest text-accent-blue uppercase">
                 {project.category}
               </span>
-              <h1 className="text-4xl md:text-7xl font-black tracking-tight text-text-primary leading-none uppercase">
+              <h1 className="text-clamp-hero font-black tracking-tight text-text-primary leading-none uppercase">
                 {project.title}
               </h1>
               <p className="text-sm font-mono tracking-widest text-text-secondary uppercase">
@@ -107,13 +107,13 @@ export const ProjectCaseStudy = ({
               </h2>
             </div>
 
-            <div className="lg:col-span-4 flex justify-start lg:justify-end">
-              <MagneticButton strength={0.2}>
+            <div className="lg:col-span-4 flex justify-start lg:justify-end w-full md:w-auto">
+              <MagneticButton strength={0.2} className="w-full md:w-auto">
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass border border-text-primary/10 text-text-primary font-bold tracking-widest text-xs px-6 py-3.5 rounded hover:border-text-primary transition-colors flex items-center space-x-2"
+                  className="glass border border-text-primary/10 text-text-primary font-bold tracking-widest text-xs px-6 py-3.5 rounded hover:border-text-primary transition-colors flex items-center space-x-2 w-full md:w-auto justify-center min-h-[48px]"
                 >
                   <span>VISIT LIVE WEBSITE</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -125,7 +125,7 @@ export const ProjectCaseStudy = ({
 
         {/* Cinematic Cover Image */}
         <div className="w-full max-w-7xl mx-auto px-6 md:px-12 my-12 md:my-16">
-          <div className="aspect-[21/9] w-full rounded-2xl overflow-hidden border border-text-primary/5 shadow-2xl">
+          <div className="aspect-[16/9] md:aspect-[21/9] w-full rounded-2xl overflow-hidden border border-text-primary/5 shadow-2xl">
             {!imageError ? (
               <img
                 src={project.image}
@@ -404,11 +404,11 @@ export const ProjectCaseStudy = ({
             <h2 className="text-2xl md:text-4xl font-black text-text-primary uppercase hover:text-accent-blue transition-colors duration-300">
               {nextProject.title}
             </h2>
-            <div className="mt-6">
-              <MagneticButton strength={0.25}>
+            <div className="mt-6 w-full md:w-auto">
+              <MagneticButton strength={0.25} className="w-full md:w-auto">
                 <button
                   onClick={() => onNavigateToCaseStudy(nextProject.id)}
-                  className="bg-text-primary text-background font-extrabold tracking-widest text-xs px-8 py-4 rounded hover:bg-accent-blue hover:text-white transition-all duration-300 flex items-center space-x-2 mx-auto"
+                  className="bg-text-primary text-background font-extrabold tracking-widest text-xs px-8 py-4 rounded hover:bg-accent-blue hover:text-white transition-all duration-300 flex items-center space-x-2 w-full md:w-auto justify-center min-h-[48px] mx-auto"
                 >
                   <span>CONTINUE READING</span>
                   <ArrowRight className="w-4 h-4" />
@@ -424,7 +424,7 @@ export const ProjectCaseStudy = ({
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block text-4xl md:text-7xl font-black text-text-primary hover:text-accent-cyan tracking-tighter uppercase transition-colors duration-300 hover:scale-102"
+            className="inline-block text-clamp-hero font-black text-text-primary hover:text-accent-cyan tracking-tighter uppercase transition-colors duration-300 hover:scale-102"
           >
             EXPLORE {project.title} ↗
           </a>
